@@ -1,0 +1,35 @@
+[1.392s] Invoking command in '/home/ubuntu/ros2_slam_nav_ws/src/robot_slam': PYTHONPATH=/home/ubuntu/ros2_slam_nav_ws/build/robot_slam/prefix_override:/home/ubuntu/ros2_slam_nav_ws/install/robot_slam/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/robot_slam build --build-base /home/ubuntu/ros2_slam_nav_ws/build/robot_slam/build install --record /home/ubuntu/ros2_slam_nav_ws/build/robot_slam/install.log --single-version-externally-managed
+[1.574s] running egg_info
+[1.574s] creating ../../build/robot_slam/robot_slam.egg-info
+[1.575s] writing ../../build/robot_slam/robot_slam.egg-info/PKG-INFO
+[1.575s] writing dependency_links to ../../build/robot_slam/robot_slam.egg-info/dependency_links.txt
+[1.576s] writing entry points to ../../build/robot_slam/robot_slam.egg-info/entry_points.txt
+[1.576s] writing requirements to ../../build/robot_slam/robot_slam.egg-info/requires.txt
+[1.577s] writing top-level names to ../../build/robot_slam/robot_slam.egg-info/top_level.txt
+[1.577s] writing manifest file '../../build/robot_slam/robot_slam.egg-info/SOURCES.txt'
+[1.578s] reading manifest file '../../build/robot_slam/robot_slam.egg-info/SOURCES.txt'
+[1.578s] writing manifest file '../../build/robot_slam/robot_slam.egg-info/SOURCES.txt'
+[1.579s] running build
+[1.579s] running build_py
+[1.579s] creating /home/ubuntu/ros2_slam_nav_ws/build/robot_slam/build
+[1.579s] creating /home/ubuntu/ros2_slam_nav_ws/build/robot_slam/build/lib
+[1.580s] creating /home/ubuntu/ros2_slam_nav_ws/build/robot_slam/build/lib/robot_slam
+[1.580s] copying robot_slam/__init__.py -> /home/ubuntu/ros2_slam_nav_ws/build/robot_slam/build/lib/robot_slam
+[1.580s] running install
+[1.581s] /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[1.581s]   warnings.warn(
+[1.581s] running install_lib
+[1.581s] creating /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/lib/python3.10/site-packages/robot_slam
+[1.582s] copying /home/ubuntu/ros2_slam_nav_ws/build/robot_slam/build/lib/robot_slam/__init__.py -> /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/lib/python3.10/site-packages/robot_slam
+[1.582s] byte-compiling /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/lib/python3.10/site-packages/robot_slam/__init__.py to __init__.cpython-310.pyc
+[1.583s] running install_data
+[1.583s] creating /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/share/ament_index
+[1.584s] creating /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/share/ament_index/resource_index
+[1.584s] creating /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/share/ament_index/resource_index/packages
+[1.584s] copying resource/robot_slam -> /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/share/ament_index/resource_index/packages
+[1.584s] copying package.xml -> /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/share/robot_slam
+[1.584s] running install_egg_info
+[1.587s] Copying ../../build/robot_slam/robot_slam.egg-info to /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/lib/python3.10/site-packages/robot_slam-0.0.0-py3.10.egg-info
+[1.589s] running install_scripts
+[1.611s] writing list of installed files to '/home/ubuntu/ros2_slam_nav_ws/build/robot_slam/install.log'
+[1.649s] Invoked command in '/home/ubuntu/ros2_slam_nav_ws/src/robot_slam' returned '0': PYTHONPATH=/home/ubuntu/ros2_slam_nav_ws/build/robot_slam/prefix_override:/home/ubuntu/ros2_slam_nav_ws/install/robot_slam/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/robot_slam build --build-base /home/ubuntu/ros2_slam_nav_ws/build/robot_slam/build install --record /home/ubuntu/ros2_slam_nav_ws/build/robot_slam/install.log --single-version-externally-managed
