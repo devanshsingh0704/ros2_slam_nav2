@@ -4,11 +4,20 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch.substitutions import Command, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
 
 
 def generate_launch_description():
 
-    # Xacro → robot_description
+    # ---- WORLD PATH ----
+    world_path = PathJoinSubstitution([
+        FindPackageShare('robot_gazebo'),
+        'worlds',
+        'maze_1.world'
+    ])
+
+    # ---- ROBOT DESCRIPTION FROM XACRO ----
     robot_description = Command([
         'xacro ',
         PathJoinSubstitution([
@@ -18,7 +27,7 @@ def generate_launch_description():
         ])
     ])
 
-    # Robot State Publisher
+    # ---- ROBOT STATE PUBLISHER ----
     rsp_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -29,29 +38,35 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Launch Gazebo with Turtlebot3 world
+    # ---- GAZEBO ----
     gazebo = IncludeLaunchDescription(
-    PythonLaunchDescriptionSource(
-        PathJoinSubstitution([
-            FindPackageShare('gazebo_ros'),
-            'launch',
-            'gazebo.launch.py'
-        ])
-    ),
-)
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution([
+                FindPackageShare('gazebo_ros'),
+                'launch',
+                'gazebo.launch.py'
+            ])
+        ),
+        launch_arguments={
+            'world': world_path
+        }.items()
+    )
 
-    # Spawn robot after Gazebo loads
+    # ---- SPAWN ROBOT (Delayed) ----
     spawn_robot = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
         arguments=[
             '-entity', 'slam_bot',
-            '-topic', 'robot_description'
+            '-topic', 'robot_description',
+            '-x', '0.0',
+            '-y', '0.0',
+            '-z', '0.1'   # spawn slightly above ground to avoid collision bounce
         ],
         output='screen'
     )
 
-    # RViz
+    # ---- RVIZ ----
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -63,7 +78,7 @@ def generate_launch_description():
         gazebo,
         rsp_node,
         TimerAction(
-            period=3.0,
+            period=4.0,   # wait for gazebo physics to load
             actions=[spawn_robot]
         ),
         rviz
