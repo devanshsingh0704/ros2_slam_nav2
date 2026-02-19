@@ -32,18 +32,18 @@ The robot includes:
 
 # Workspace Structure
 
-ros2_slam_nav_ws/
+ros2_slam_nav_ws
 │
-├── src/
-│   ├── robot_description/   # URDF/Xacro robot model
-│   ├── robot_gazebo/        # Gazebo plugins & simulation
-│   ├── robot_bringup/       # Launch files & teleop
-│   ├── robot_slam/          # SLAM configuration
-│   └── robot_nav2/          # Navigation2 configuration
+├── src
+│   ├── robot_description  # URDF/Xacro robot model
+│   ├── robot_gazebo       # Gazebo plugins & simulation
+│   ├── robot_bringup      # Launch files & teleop
+│   ├── robot_slam         # SLAM configuration
+│   └── robot_nav2         # Navigation2 configuration
 │
-├── build/      # Ignored in Git
-├── install/    # Ignored in Git
-└── log/        # Ignored in Git
+├── build      # Ignored in Git
+├── install    # Ignored in Git
+└── log        # Ignored in Git
 
 
 
