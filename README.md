@@ -1,4 +1,4 @@
- 🚀 ROS2 SLAM + Nav2 Autonomous Navigation Workspace
+# 🚀 ROS2 SLAM + Nav2 Autonomous Navigation Workspace
 
 A complete **ROS2 Humble** based mobile robot simulation project implementing:
 
@@ -13,8 +13,9 @@ A complete **ROS2 Humble** based mobile robot simulation project implementing:
 - ✅ RViz Visualization
 - ✅ Modular Launch Architecture
 
+---
 
- 📌 Project Overview
+# 📌 Project Overview
 
 This project demonstrates a fully simulated **differential-drive mobile robot** capable of:
 
@@ -28,31 +29,35 @@ This project demonstrates a fully simulated **differential-drive mobile robot** 
 
 The system is built entirely in **ROS2 Humble** and runs in **Gazebo Classic**.
 
+---
 
- 🤖 Robot Model – slam_bot
+# 🤖 Robot Model – slam_bot
 
 ## Robot Hardware (Simulated)
 
-- Cylindrical Base
-- Two Drive Wheels
-- Rear Caster Wheel
-- 2D LiDAR Sensor
-- Differential Drive Plugin
-- Laser Plugin
-- Proper TF Frame Hierarchy
-
+- Cylindrical Base  
+- Two Drive Wheels  
+- Rear Caster Wheel  
+- 2D LiDAR Sensor  
+- Differential Drive Plugin  
+- Laser Plugin  
+- Proper TF Frame Hierarchy  
 
 ## TF Tree
 
+```
 map
  └── odom
       └── base_footprint
            └── base_link
                 └── laser
+```
 
+---
 
- 📂 Workspace Structure
+# 📂 Workspace Structure
 
+```
 ros2_slam_nav_ws
 │
 ├── src
@@ -65,8 +70,9 @@ ros2_slam_nav_ws
 ├── build      # Ignored
 ├── install    # Ignored
 └── log        # Ignored
+```
 
-
+---
 
 # 🧠 System Architecture
 
@@ -89,39 +95,48 @@ https://miro.com/app/board/uXjVGEQIZ90=/?share_link_id=693484872370
 8. RViz Visualization
 9. TF Frame Hierarchy
 
+---
 
 # 🔄 FINAL Navigation & Localization Workflow
 
 Below are the exact commands used for the fully working localization and navigation system.
 
+---
 
 ## 🟢 Step 1 – Launch Robot + Gazebo
 
-bash
+```bash
 ros2 launch robot_bringup bringup.launch.py
+```
 
+---
 
+## 🗺 Step 2 – Launch Localization (AMCL)
 
- 🗺 Step 2 – Launch Localization (AMCL)
+```bash
+ros2 launch robot_nav2 localization.launch.py \
+map:=/home/ubuntu/ros2_slam_nav_ws/src/robot_nav2/config/nav2_params.yaml
+```
 
-bash
-ros2 launch robot_nav2 localization.launch.py map:=/home/ubuntu/ros2_slam_nav_ws/src/robot_nav2/config/nav2_params.yaml
-
-
+---
 
 ## 🧭 Step 3 – Launch RViz
 
-bash
+```bash
 ros2 launch nav2_bringup rviz_launch.py
+```
 
-
+---
 
 ## 🚀 Step 4 – Launch Nav2 Stack
 
-bash
-ros2 launch nav2_bringup bringup_launch.py use_sim_time:=true map:=/home/ubuntu/ros2_slam_nav_ws/src/robot_nav2/config/nav2_params.yaml
+```bash
+ros2 launch nav2_bringup bringup_launch.py \
+use_sim_time:=true \
+map:=/home/ubuntu/ros2_slam_nav_ws/src/robot_nav2/config/nav2_params.yaml
+```
 
-
+---
 
 # 📡 ROS2 Topics Used
 
@@ -134,62 +149,67 @@ ros2 launch nav2_bringup bringup_launch.py use_sim_time:=true map:=/home/ubuntu/
 | /amcl_pose | geometry_msgs/PoseWithCovarianceStamped | Localization |
 | /tf | tf2_msgs/TFMessage | Frame transforms |
 
+---
 
- 🔁 Complete System Flow
+# 🔁 Complete System Flow
 
- 🔵 Localization Mode
+## 🔵 Localization Mode
 
-1. Map is loaded
-2. AMCL estimates robot pose
-3. /amcl_pose updates continuously
-4. TF tree: map → odom → base_link
+1. Map is loaded  
+2. AMCL estimates robot pose  
+3. `/amcl_pose` updates continuously  
+4. TF tree: `map → odom → base_link`  
 
- 🟣 Navigation Mode
+## 🟣 Navigation Mode
 
-1. Set Initial Pose in RViz
-2. Send 2D Goal Pose
-3. Nav2 Planner computes global path
-4. Controller computes velocity
-5. /cmd_vel moves robot
-6. Costmaps update dynamically
+1. Set Initial Pose in RViz  
+2. Send 2D Goal Pose  
+3. Nav2 Planner computes global path  
+4. Controller computes velocity  
+5. `/cmd_vel` moves robot  
+6. Costmaps update dynamically  
 
+---
 
- ⚙️ Technologies Used
+# ⚙️ Technologies Used
 
-- ROS2 Humble
-- Gazebo 11 (Classic)
-- RViz2
-- SLAM Toolbox
-- Nav2
-- AMCL
-- Map Server
-- Python (ament_python)
-- URDF / Xacro
-- TF2
+- ROS2 Humble  
+- Gazebo 11 (Classic)  
+- RViz2  
+- SLAM Toolbox  
+- Nav2  
+- AMCL  
+- Map Server  
+- Python (ament_python)  
+- URDF / Xacro  
+- TF2  
 
+---
 
- 🎯 Project Goal
+# 🎯 Project Goal
 
 To design and simulate a fully autonomous SLAM-capable mobile robot and implement complete localization and navigation using the ROS2 Navigation Stack.
 
 This workspace demonstrates:
 
-- End-to-end SLAM pipeline
-- Map saving & loading
-- AMCL localization
-- Path planning & control
-- Obstacle avoidance
-- Proper ROS2 modular architecture
+- End-to-end SLAM pipeline  
+- Map saving & loading  
+- AMCL localization  
+- Path planning & control  
+- Obstacle avoidance  
+- Proper ROS2 modular architecture  
 
+---
 
 # 🧪 Development Environment
 
-- Ubuntu 22.04
-- ROS2 Humble
-- Gazebo Classic
-- VS Codium
-- Simulation-first workflow
+- Ubuntu 22.04  
+- ROS2 Humble  
+- Gazebo Classic  
+- VS Codium  
+- Simulation-first workflow  
 
+---
 
 # 👨‍💻 Author
 
@@ -197,10 +217,12 @@ This workspace demonstrates:
 ROS2 SLAM & Navigation Developer  
 
 GitHub:  
-https://github.com/devanshsingh0704
+https://github.com/devanshsingh0704  
 
+---
 
 # 📝 Notes
 
+- `build/`, `install/`, and `log/` folders are excluded via `.gitignore`
 - Fully tested localization + navigation workflow
 - Ready for real robot adaptation
