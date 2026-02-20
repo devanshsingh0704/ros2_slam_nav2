@@ -85,7 +85,6 @@
   <axis xyz="0 1 0"/>
 </joint>
 
-
   <!-- RIGHT WHEEL -->
 <link name="right_wheel_link">
   <visual>
@@ -278,6 +277,7 @@
 
     <wheel_separation>${wheel_sep}</wheel_separation>
     <wheel_radius>${wheel_radius}</wheel_radius>
+    <wheel_diameter>${wheel_radius * 2}</wheel_diameter>
 
     <command_topic>cmd_vel</command_topic>
     <odometry_topic>odom</odometry_topic>

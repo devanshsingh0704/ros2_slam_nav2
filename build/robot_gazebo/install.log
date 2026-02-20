@@ -2,6 +2,9 @@
 /home/ubuntu/ros2_slam_nav_ws/install/robot_gazebo/lib/python3.10/site-packages/robot_gazebo/__pycache__/__init__.cpython-310.pyc
 /home/ubuntu/ros2_slam_nav_ws/install/robot_gazebo/share/ament_index/resource_index/packages/robot_gazebo
 /home/ubuntu/ros2_slam_nav_ws/install/robot_gazebo/share/robot_gazebo/package.xml
+/home/ubuntu/ros2_slam_nav_ws/install/robot_gazebo/share/robot_gazebo/worlds/maze_1.world
+/home/ubuntu/ros2_slam_nav_ws/install/robot_gazebo/share/robot_gazebo/models/maze_1/model.config
+/home/ubuntu/ros2_slam_nav_ws/install/robot_gazebo/share/robot_gazebo/models/maze_1/model.sdf
 /home/ubuntu/ros2_slam_nav_ws/install/robot_gazebo/lib/python3.10/site-packages/robot_gazebo-0.0.0-py3.10.egg-info/PKG-INFO
 /home/ubuntu/ros2_slam_nav_ws/install/robot_gazebo/lib/python3.10/site-packages/robot_gazebo-0.0.0-py3.10.egg-info/entry_points.txt
 /home/ubuntu/ros2_slam_nav_ws/install/robot_gazebo/lib/python3.10/site-packages/robot_gazebo-0.0.0-py3.10.egg-info/zip-safe

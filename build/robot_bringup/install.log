@@ -4,7 +4,11 @@
 /home/ubuntu/ros2_slam_nav_ws/install/robot_bringup/lib/python3.10/site-packages/robot_bringup/__pycache__/__init__.cpython-310.pyc
 /home/ubuntu/ros2_slam_nav_ws/install/robot_bringup/share/ament_index/resource_index/packages/robot_bringup
 /home/ubuntu/ros2_slam_nav_ws/install/robot_bringup/share/robot_bringup/package.xml
+/home/ubuntu/ros2_slam_nav_ws/install/robot_bringup/share/robot_bringup/launch/slam_bringup.launch.py
+/home/ubuntu/ros2_slam_nav_ws/install/robot_bringup/share/robot_bringup/launch/nav_bringup.launch.py
 /home/ubuntu/ros2_slam_nav_ws/install/robot_bringup/share/robot_bringup/launch/bringup.launch.py
+/home/ubuntu/ros2_slam_nav_ws/install/robot_bringup/share/robot_bringup/rviz/slam.rviz
+/home/ubuntu/ros2_slam_nav_ws/install/robot_bringup/share/robot_bringup/rviz/nav.rviz
 /home/ubuntu/ros2_slam_nav_ws/install/robot_bringup/lib/python3.10/site-packages/robot_bringup-0.0.0-py3.10.egg-info/PKG-INFO
 /home/ubuntu/ros2_slam_nav_ws/install/robot_bringup/lib/python3.10/site-packages/robot_bringup-0.0.0-py3.10.egg-info/entry_points.txt
 /home/ubuntu/ros2_slam_nav_ws/install/robot_bringup/lib/python3.10/site-packages/robot_bringup-0.0.0-py3.10.egg-info/zip-safe

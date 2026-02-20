@@ -9,9 +9,13 @@ setup.py
 ../../build/robot_bringup/robot_bringup.egg-info/top_level.txt
 ../../build/robot_bringup/robot_bringup.egg-info/zip-safe
 launch/bringup.launch.py
+launch/nav_bringup.launch.py
+launch/slam_bringup.launch.py
 resource/robot_bringup
 robot_bringup/__init__.py
 robot_bringup/teleop_keyboard.py
+rviz/nav.rviz
+rviz/slam.rviz
 test/test_copyright.py
 test/test_flake8.py
 test/test_pep257.py

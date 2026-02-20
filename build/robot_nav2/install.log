@@ -2,6 +2,11 @@
 /home/ubuntu/ros2_slam_nav_ws/install/robot_nav2/lib/python3.10/site-packages/robot_nav2/__pycache__/__init__.cpython-310.pyc
 /home/ubuntu/ros2_slam_nav_ws/install/robot_nav2/share/ament_index/resource_index/packages/robot_nav2
 /home/ubuntu/ros2_slam_nav_ws/install/robot_nav2/share/robot_nav2/package.xml
+/home/ubuntu/ros2_slam_nav_ws/install/robot_nav2/share/robot_nav2/launch/localization.launch.py
+/home/ubuntu/ros2_slam_nav_ws/install/robot_nav2/share/robot_nav2/launch/nav2_bringup.launch.py
+/home/ubuntu/ros2_slam_nav_ws/install/robot_nav2/share/robot_nav2/config/nav2_params.yaml
+/home/ubuntu/ros2_slam_nav_ws/install/robot_nav2/share/robot_nav2/maps/maze_map.pgm
+/home/ubuntu/ros2_slam_nav_ws/install/robot_nav2/share/robot_nav2/maps/maze_map.yaml
 /home/ubuntu/ros2_slam_nav_ws/install/robot_nav2/lib/python3.10/site-packages/robot_nav2-0.0.0-py3.10.egg-info/PKG-INFO
 /home/ubuntu/ros2_slam_nav_ws/install/robot_nav2/lib/python3.10/site-packages/robot_nav2-0.0.0-py3.10.egg-info/entry_points.txt
 /home/ubuntu/ros2_slam_nav_ws/install/robot_nav2/lib/python3.10/site-packages/robot_nav2-0.0.0-py3.10.egg-info/zip-safe

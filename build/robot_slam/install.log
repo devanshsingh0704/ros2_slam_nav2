@@ -2,6 +2,8 @@
 /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/lib/python3.10/site-packages/robot_slam/__pycache__/__init__.cpython-310.pyc
 /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/share/ament_index/resource_index/packages/robot_slam
 /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/share/robot_slam/package.xml
+/home/ubuntu/ros2_slam_nav_ws/install/robot_slam/share/robot_slam/launch/slam.launch.py
+/home/ubuntu/ros2_slam_nav_ws/install/robot_slam/share/robot_slam/config/slam_params.yaml
 /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/lib/python3.10/site-packages/robot_slam-0.0.0-py3.10.egg-info/PKG-INFO
 /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/lib/python3.10/site-packages/robot_slam-0.0.0-py3.10.egg-info/entry_points.txt
 /home/ubuntu/ros2_slam_nav_ws/install/robot_slam/lib/python3.10/site-packages/robot_slam-0.0.0-py3.10.egg-info/zip-safe

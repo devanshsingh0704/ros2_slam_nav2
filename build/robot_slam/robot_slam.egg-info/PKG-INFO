@@ -1,11 +1,11 @@
 Metadata-Version: 2.1
 Name: robot-slam
 Version: 0.0.0
-Summary: TODO: Package description
+Summary: SLAM package using slam_toolbox for async mapping
 Home-page: UNKNOWN
 Maintainer: ubuntu
 Maintainer-email: ubuntu@todo.todo
-License: TODO: License declaration
+License: Apache-2.0
 Platform: UNKNOWN
 
 UNKNOWN
