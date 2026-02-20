@@ -202,6 +202,5 @@ https://github.com/devanshsingh0704
 
 # 📝 Notes
 
-- build/, install/, and log/ folders are excluded via .gitignore
 - Fully tested localization + navigation workflow
 - Ready for real robot adaptation
