@@ -77,7 +77,7 @@ ros2_slam_nav_ws
 # 🧠 System Architecture
 
 🔗 **Full Architecture Diagram (Miro Board):**  
-https://miro.com/app/board/uXjVGEQIZ90=/?share_link_id=693484872370
+https://miro.com/app/board/uXjVGEQIZ90=/?share_link_id=595685209121
 
 ## Architecture Layers
 
