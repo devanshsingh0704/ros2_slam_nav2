@@ -4,7 +4,7 @@
   <name>robot_gazebo</name>
   <version>0.0.0</version>
   <description>Gazebo worlds and models for slam_bot simulation</description>
-  <maintainer email="ubuntu@todo.todo">ubuntu</maintainer>
+  <maintainer email="devanshsingh0704@users.noreply.github.com">Devansh Kumar Singh</maintainer>
   <license>Apache-2.0</license>
 
   <exec_depend>gazebo_ros</exec_depend>

@@ -4,7 +4,7 @@
   <name>robot_slam</name>
   <version>0.0.0</version>
   <description>SLAM package using slam_toolbox for async mapping</description>
-  <maintainer email="ubuntu@todo.todo">ubuntu</maintainer>
+  <maintainer email="devanshsingh0704@users.noreply.github.com">Devansh Kumar Singh</maintainer>
   <license>Apache-2.0</license>
 
   <exec_depend>slam_toolbox</exec_depend>

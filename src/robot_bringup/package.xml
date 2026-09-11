@@ -4,7 +4,7 @@
   <name>robot_bringup</name>
   <version>0.0.0</version>
   <description>Robot bringup package — full SLAM and Navigation pipeline launches</description>
-  <maintainer email="ubuntu@todo.todo">ubuntu</maintainer>
+  <maintainer email="devanshsingh0704@users.noreply.github.com">Devansh Kumar Singh</maintainer>
   <license>Apache-2.0</license>
 
   <!-- Runtime dependencies -->
