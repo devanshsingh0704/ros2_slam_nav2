@@ -1,228 +1,244 @@
-# 🚀 ROS2 SLAM + Nav2 Autonomous Navigation Workspace
+# 🚀 ROS 2 SLAM + Nav2 Autonomous Navigation
 
-A complete **ROS2 Humble** based mobile robot simulation project implementing:
+A complete **ROS 2 Humble** simulation of a differential-drive robot that maps an
+unknown maze with SLAM Toolbox, then localises and navigates it autonomously with
+Nav2 — all in Gazebo Classic.
 
-- ✅ Custom Differential Drive Robot (**slam_bot**)
-- ✅ URDF / Xacro Robot Modeling
-- ✅ Gazebo Classic Simulation
-- ✅ SLAM Mapping (SLAM Toolbox)
-- ✅ Map Saving
-- ✅ AMCL Localization
-- ✅ Autonomous Navigation (Nav2)
-- ✅ Teleoperation
-- ✅ RViz Visualization
-- ✅ Modular Launch Architecture
+Two commands get you there. One brings up the whole SLAM pipeline, the other the
+whole navigation pipeline; each starts Gazebo, the robot, the stack and a
+preconfigured RViz together.
 
 ---
 
-# 📌 Project Overview
+## What's in it
 
-This project demonstrates a fully simulated **differential-drive mobile robot** capable of:
-
-- Performing SLAM (Simultaneous Localization and Mapping)
-- Generating a 2D occupancy grid map
-- Saving and loading maps
-- Localizing using AMCL
-- Planning and executing paths using Nav2
-- Avoiding obstacles using costmaps
-- Navigating autonomously to goal poses
-
-The system is built entirely in **ROS2 Humble** and runs in **Gazebo Classic**.
+- Custom differential-drive robot (**slam_bot**) in URDF/Xacro
+- 360° 2D LiDAR and wheel odometry via Gazebo plugins
+- SLAM mapping with **SLAM Toolbox** (async)
+- Map saving and reloading
+- **AMCL** localisation
+- Autonomous navigation with the full **Nav2** stack
+- Keyboard teleoperation
+- Preconfigured RViz layouts for mapping and for navigation
+- Custom maze world
 
 ---
 
-# 🤖 Robot Model – slam_bot
+## The robot — slam_bot
 
-## Robot Hardware (Simulated)
+| | |
+|---|---|
+| Drive | Differential, two powered wheels + rear caster |
+| Sensor | 2D LiDAR, 360 samples, 0.12–10 m, 15 Hz |
+| Odometry | Wheel odometry from the diff-drive plugin |
+| Base frame | `base_footprint` |
 
-- Cylindrical Base  
-- Two Drive Wheels  
-- Rear Caster Wheel  
-- 2D LiDAR Sensor  
-- Differential Drive Plugin  
-- Laser Plugin  
-- Proper TF Frame Hierarchy  
-
-## TF Tree
+### TF tree
 
 ```
 map
  └── odom
       └── base_footprint
            └── base_link
-                └── laser
+                ├── left_wheel_link
+                ├── right_wheel_link
+                ├── caster_link
+                └── lidar_link
 ```
 
 ---
 
-# 📂 Workspace Structure
+## Requirements
 
-```
-ros2_slam_nav_ws
-│
-├── src
-│   ├── robot_description   # URDF/Xacro model
-│   ├── robot_gazebo        # Gazebo plugins & world
-│   ├── robot_bringup       # Main simulation launch
-│   ├── robot_slam          # SLAM Toolbox config
-│   └── robot_nav2          # Nav2 + AMCL configuration
-│
-├── build      # Ignored
-├── install    # Ignored
-└── log        # Ignored
-```
+- Ubuntu 22.04
+- ROS 2 Humble
+- Gazebo Classic (Gazebo 11)
 
 ---
 
-# 🧠 System Architecture
-
-🔗 **Full Architecture Diagram (Miro Board):**  
-https://miro.com/app/board/uXjVGEQIZ90=/?share_link_id=595685209121
-
-## Architecture Layers
-
-1. Robot Description Layer (URDF/Xacro)
-2. Gazebo Simulation Layer
-3. Sensor & Odometry Layer
-4. SLAM Toolbox Layer
-5. Map Server
-6. AMCL Localization
-7. Navigation2 Stack
-   - Planner Server
-   - Controller Server
-   - BT Navigator
-   - Recovery Behaviors
-8. RViz Visualization
-9. TF Frame Hierarchy
-
----
-
-# 🔄 FINAL Navigation & Localization Workflow
-
-Below are the exact commands used for the fully working localization and navigation system.
-
----
-
-## 🟢 Step 1 – Launch Robot + Gazebo
+## Build
 
 ```bash
+git clone https://github.com/devanshsingh0704/ros2_slam_nav2.git
+cd ros2_slam_nav2
+```
+
+Install the ROS dependencies. Every package declares what it needs in its
+`package.xml`, so `rosdep` resolves the lot:
+
+```bash
+rosdep install --from-paths src --ignore-src -r -y
+```
+
+Build and source:
+
+```bash
+colcon build --symlink-install
+source install/setup.bash
+```
+
+Source the workspace in **every new terminal** you use below.
+
+---
+
+## Mapping a new area (SLAM)
+
+**Terminal 1** — Gazebo, the robot, SLAM Toolbox and RViz:
+
+```bash
+ros2 launch robot_bringup slam_bringup.launch.py
+```
+
+**Terminal 2** — drive the robot around to build the map:
+
+```bash
+ros2 run robot_bringup teleop_keyboard
+```
+
+| Key | Action |
+|---|---|
+| `w` / `s` | forward / backward |
+| `a` / `d` | turn left / right |
+| `space` | stop |
+| `q` | quit |
+
+The robot stops on its own if no key is held, so it will not run away from you.
+Watch the map fill in inside RViz.
+
+**Terminal 3** — save the map once you are happy with it:
+
+```bash
+ros2 run nav2_map_server map_saver_cli -f maze_map
+```
+
+That writes `maze_map.pgm` and `maze_map.yaml`. To make it the map the navigation
+launch uses, drop both into the package and rebuild:
+
+```bash
+cp maze_map.pgm maze_map.yaml src/robot_nav2/maps/
+colcon build --symlink-install
+```
+
+---
+
+## Navigating a saved map
+
+A map of the maze is already included, so this works straight after building:
+
+```bash
+ros2 launch robot_bringup nav_bringup.launch.py
+```
+
+That starts Gazebo, the robot, map server, AMCL, planner, controller, behaviour
+server, BT navigator and RViz.
+
+Then, in RViz:
+
+1. Click **2D Pose Estimate** and click-drag on the map where the robot actually
+   is, pointing the arrow the way it faces. AMCL needs this before it can
+   localise.
+2. Click **2D Goal Pose** and click-drag anywhere you want it to drive to.
+3. The planner draws a path, the controller follows it, and the costmaps update
+   around obstacles as it goes.
+
+---
+
+## Running the pieces separately
+
+The bringup launches above are the easy path. Each layer can also be run on its
+own, which is handy when you are debugging one of them.
+
+```bash
+# Gazebo + robot only, no SLAM and no Nav2
 ros2 launch robot_bringup bringup.launch.py
+
+# SLAM Toolbox alone (needs the robot already running)
+ros2 launch robot_slam slam.launch.py
+
+# Map server + AMCL only, no path planning
+ros2 launch robot_nav2 localization.launch.py
+
+# The full Nav2 stack, no Gazebo
+ros2 launch robot_nav2 nav2_bringup.launch.py
 ```
+
+Every one of these resolves its own map, config and world paths from the
+installed package, so none of them need a path argument. All default to
+`use_sim_time:=true`.
 
 ---
 
-## 🗺 Step 2 – Launch Localization (AMCL)
+## Packages
 
-```bash
-ros2 launch robot_nav2 localization.launch.py \
-map:=/home/ubuntu/ros2_slam_nav_ws/src/robot_nav2/config/nav2_params.yaml
-```
+| Package | What it holds |
+|---|---|
+| `robot_description` | URDF/Xacro model, Gazebo sensor and diff-drive plugins |
+| `robot_gazebo` | The maze world and its model |
+| `robot_bringup` | The three bringup launches, RViz layouts, teleop node |
+| `robot_slam` | SLAM Toolbox launch and tuning parameters |
+| `robot_nav2` | Nav2 + AMCL launches, parameters, and the saved map |
 
----
+### Where to tune things
 
-## 🧭 Step 3 – Launch RViz
-
-```bash
-ros2 launch nav2_bringup rviz_launch.py
-```
-
----
-
-## 🚀 Step 4 – Launch Nav2 Stack
-
-```bash
-ros2 launch nav2_bringup bringup_launch.py \
-use_sim_time:=true \
-map:=/home/ubuntu/ros2_slam_nav_ws/src/robot_nav2/config/nav2_params.yaml
-```
+| File | Controls |
+|---|---|
+| `src/robot_slam/config/slam_params.yaml` | SLAM resolution, loop closure, scan matching |
+| `src/robot_nav2/config/nav2_params.yaml` | AMCL, costmaps, planner, controller, recovery |
+| `src/robot_description/urdf/robot.urdf.xacro` | Robot geometry, LiDAR range, wheel sizes |
+| `src/robot_nav2/maps/maze_map.yaml` | Map resolution and origin |
 
 ---
 
-# 📡 ROS2 Topics Used
+## Topics
 
 | Topic | Type | Purpose |
-|-------|------|----------|
-| /cmd_vel | geometry_msgs/Twist | Velocity commands |
-| /scan | sensor_msgs/LaserScan | LiDAR data |
-| /odom | nav_msgs/Odometry | Robot odometry |
-| /map | nav_msgs/OccupancyGrid | 2D Map |
-| /amcl_pose | geometry_msgs/PoseWithCovarianceStamped | Localization |
-| /tf | tf2_msgs/TFMessage | Frame transforms |
+|---|---|---|
+| `/cmd_vel` | `geometry_msgs/Twist` | Velocity commands |
+| `/scan` | `sensor_msgs/LaserScan` | LiDAR data |
+| `/odom` | `nav_msgs/Odometry` | Wheel odometry |
+| `/map` | `nav_msgs/OccupancyGrid` | Occupancy grid |
+| `/amcl_pose` | `geometry_msgs/PoseWithCovarianceStamped` | Localised pose |
+| `/tf` | `tf2_msgs/TFMessage` | Frame transforms |
 
 ---
 
-# 🔁 Complete System Flow
+## Architecture
 
-## 🔵 Localization Mode
+Full diagram on Miro:
+https://miro.com/app/board/uXjVGEQIZ90=/?share_link_id=595685209121
 
-1. Map is loaded  
-2. AMCL estimates robot pose  
-3. `/amcl_pose` updates continuously  
-4. TF tree: `map → odom → base_link`  
-
-## 🟣 Navigation Mode
-
-1. Set Initial Pose in RViz  
-2. Send 2D Goal Pose  
-3. Nav2 Planner computes global path  
-4. Controller computes velocity  
-5. `/cmd_vel` moves robot  
-6. Costmaps update dynamically  
+```
+URDF/Xacro  →  Gazebo  →  /scan + /odom + TF
+                              │
+                    ┌─────────┴─────────┐
+              SLAM Toolbox          Map Server + AMCL
+                    │                    │
+                  /map              localised pose
+                                         │
+                                    Nav2: planner → controller → /cmd_vel
+```
 
 ---
 
-# ⚙️ Technologies Used
+## Known limits
 
-- ROS2 Humble  
-- Gazebo 11 (Classic)  
-- RViz2  
-- SLAM Toolbox  
-- Nav2  
-- AMCL  
-- Map Server  
-- Python (ament_python)  
-- URDF / Xacro  
-- TF2  
+- Gazebo Classic only. Not ported to Gazebo Sim (Ignition).
+- The bringup launches wait a fixed 3 s for Gazebo before spawning the robot and
+  5 s before starting the stack. On a slow machine that may not be long enough;
+  raise the `TimerAction` periods in `src/robot_bringup/launch/`.
+- AMCL will not localise until you give it a **2D Pose Estimate** in RViz.
+- The included map is of `maze_1` only. A different world needs a new map.
+- Simulation only — no hardware driver layer.
 
 ---
 
-# 🎯 Project Goal
+## License
 
-To design and simulate a fully autonomous SLAM-capable mobile robot and implement complete localization and navigation using the ROS2 Navigation Stack.
-
-This workspace demonstrates:
-
-- End-to-end SLAM pipeline  
-- Map saving & loading  
-- AMCL localization  
-- Path planning & control  
-- Obstacle avoidance  
-- Proper ROS2 modular architecture  
+Apache-2.0. See [LICENSE](LICENSE).
 
 ---
 
-# 🧪 Development Environment
+## Author
 
-- Ubuntu 22.04  
-- ROS2 Humble  
-- Gazebo Classic  
-- VS Codium  
-- Simulation-first workflow  
-
----
-
-# 👨‍💻 Author
-
-**Devansh Kumar Singh**  
-ROS2 SLAM & Navigation Developer  
-
-GitHub:  
-https://github.com/devanshsingh0704  
-
----
-
-# 📝 Notes
-
-- `build/`, `install/`, and `log/` folders are excluded via `.gitignore`
-- Fully tested localization + navigation workflow
-- Ready for real robot adaptation
+**Devansh Kumar Singh**
+https://github.com/devanshsingh0704
