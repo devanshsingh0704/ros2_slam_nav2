@@ -1,3 +1,0 @@
-[console_scripts]
-teleop_keyboard = robot_bringup.teleop_keyboard:main
-
